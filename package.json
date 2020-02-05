@@ -1,0 +1,33 @@
+{
+  "name": "linkerd2-action-gcloud",
+  "version": "1.0.0",
+  "description": "This github action configures the `gcloud` CLI already present in the github action runner VM. If `create` is true, it also creates a GKE cluster that is automatically torn down after the job finishes (through a \"post\" hook)",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linkerd/linkerd2-action-gcloud.git"
+  },
+  "keywords": [
+    "linkerd",
+    "github-actions",
+    "gcloud"
+  ],
+  "author": "Linkerd Authors",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/linkerd/linkerd2-action-gcloud/issues"
+  },
+  "homepage": "https://github.com/linkerd/linkerd2-action-gcloud#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/exec": "^1.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}

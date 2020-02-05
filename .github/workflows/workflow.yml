@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+    # tagging is to be done manually, and shouldn't trigger CI
+    tags-ignore:
+    - 'v*'
+
+jobs:
+  compile_modules:
+    name: Compile Modules
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install
+      - name: Lint
+        run: node_modules/.bin/eslint *.js
+      - name: Generate self-contained files
+        run: |
+          # have to install it globally
+          npm install -g @zeit/ncc
+
+          mkdir dist_final
+
+          # result is always put under dist/index.js
+          ncc build setup.js
+          mv dist/index.js dist_final/setup.js
+          ncc build destroy.js
+          mv dist/index.js dist_final/destroy.js
+          rm -rf dist
+          mv dist_final dist
+      - name: Push changes
+        run: |
+          git config --global user.name 'Linkerd CI'
+          git config --global user.email 'linkerd-ci@users.noreply.github.com'
+          git commit -am "Automatically updated /dist"
+          git push
