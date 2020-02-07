@@ -13,8 +13,10 @@ This github action configures the `gcloud` CLI already present in the github act
     gcp_project: some-project
     # GCP zone for the cluster. REQUIRED.
     gcp_zone: us-central1-b
-    #  Set to true to create a new cluster which will be destroyed after the job finishes. Leave empty to just configure the gcloud tooling.
+    # Set to true to create a new cluster which will be destroyed after the job finishes. Leave empty to just configure the gcloud tooling.
     create: true
+    # Set to true to delete the cluster after the test finishes. Defaults to true.
+    clean_up: true
     # Cluster name; required only if 'create' is true.
     name: foobar
     # Machine type. Defaults to n1-standard-2

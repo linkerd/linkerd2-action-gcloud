@@ -9,7 +9,11 @@ inputs:
     required: true
   create:
     required: false
-    description: Set to true to create a new cluster which will be destroyed after the job finishes. Leave empty to just configure the gcloud tooling.
+    description: Set to true to create a new cluster which, by default,  will be destroyed after the job finishes. Leave empty to just configure the gcloud tooling.
+  clean_up:
+    required: false
+    default: true
+    description: Set to false to avoid the cluster being cleaned up after the test finishes.
   name:
     required: false
     description: Cluster name; required only if 'create' is true.
