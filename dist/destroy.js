@@ -66,7 +66,7 @@ const configure = __webpack_require__(865);
 
 async function destroy() {
   try {
-    const name = core.getInput('name');
+    const name = core.getInput('name').replace(/\./g, '-');
     await exec.exec('gcloud container clusters delete --quiet', [name]);
   } catch (e) {
     core.setFailed(e.message);
