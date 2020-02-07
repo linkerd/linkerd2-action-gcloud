@@ -669,7 +669,9 @@ function validate() {
 
 async function create() {
   try {
-    const name = core.getInput('name');
+    // `name` might contain dots (in case of a tagged version),
+    // which is not supported in GKE cluster names
+    const name = core.getInput('name').replace(/\./g, '-');
     const args = [
       name,
       '--machine-type', core.getInput('machine_type'),
