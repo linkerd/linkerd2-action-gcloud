@@ -709,7 +709,7 @@ async function create() {
     await exec.exec('gcloud config get-value account', [], {
       listeners: {
         stdout: (data) => {
-          sa = data.toString();
+          sa = data.toString().trim();
         },
       },
     });
