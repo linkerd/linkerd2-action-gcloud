@@ -4,7 +4,7 @@ const configure = require('./configure.js');
 
 async function destroy() {
   try {
-    const name = core.getInput('name');
+    const name = core.getInput('name').replace(/\./g, '-');
     await exec.exec('gcloud container clusters delete --quiet', [name]);
   } catch (e) {
     core.setFailed(e.message);
