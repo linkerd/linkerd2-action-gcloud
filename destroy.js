@@ -13,7 +13,7 @@ async function destroy() {
 
 async function run() {
   try {
-    if (core.getInput('create') === 'true' && core.getInput('clean_up') === true) {
+    if (core.getInput('create') === 'true' && core.getInput('clean_up') === 'true') {
       await configure();
       await destroy();
     }
