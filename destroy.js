@@ -11,9 +11,9 @@ async function destroy() {
     name = core.getInput('name').replace(/\./g, '-');
     await exec.exec('gcloud container clusters delete --quiet', [name]);
   } catch (e1) {
-    core.warning('error deleting cluster; attempting again in 4 minutes: ' + e1.message);
+    core.warning('error deleting cluster; attempting again in 5 minutes: ' + e1.message);
     try {
-      await sleep(60*4*1000);
+      await sleep(60*5*1000);
       await exec.exec('gcloud container clusters delete --quiet', [name]);
     } catch (e2) {
       core.setFailed(e2.message);
