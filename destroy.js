@@ -1,13 +1,23 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
+const util = require('util');
 const configure = require('./configure.js');
 
+const sleep = util.promisify(setTimeout);
+
 async function destroy() {
+  let name;
   try {
-    const name = core.getInput('name').replace(/\./g, '-');
+    name = core.getInput('name').replace(/\./g, '-');
     await exec.exec('gcloud container clusters delete --quiet', [name]);
-  } catch (e) {
-    core.setFailed(e.message);
+  } catch (e1) {
+    core.warning('error deleting cluster; attempting again in 4 minutes: ' + e1.message);
+    try {
+      await sleep(60*4*1000);
+      await exec.exec('gcloud container clusters delete --quiet', [name]);
+    } catch (e2) {
+      core.setFailed(e2.message);
+    }
   }
 }
 
